@@ -1,12 +1,15 @@
 #By  Santino .J. Tomasi
-#This is tic-tac-toe in python.
+#Version 1
+#Date:Nov 26,2022
+#This is tic-tac-toe in python done right.
 
 #Also ... FUNNY   \/([(.)]0[(')])\/ 
 
-
+#AND also offical this very file is VERSION 1.
 
 #Imports the os module. 
 import os
+
 
 
 
@@ -73,64 +76,91 @@ i="I" #9                                                        #
 #----------------------------------------------------------------
 
 
+
+
+
+
+
+
 #The setup function that sets the game up for what you want.
 #eg. who goes first x or o and are you playing against the computer.
+#It also figures out what os you are playing on. 
 def setup():
+    #t and s are used outside of this function so they must be global.
     global t,s
     
-    #Clears the terminal screen.
+    #This figures out if you are on linux/mac or windows.
     if os.name == "posix":
         s=1
     else:
         s=0
         
-    #Sets t or the go *t*hrough value to x.
-    #This is used to figure out which players turn it is.
     clear_screen()
     print("Who goes first X or O?")
     print(":",end="")
+    #t is the value that is used to figure which players *t*urn it is. 
     t = input()
     t = t.lower()
     
+    #When in setup and you type in the letter q or Q it will exit the game.
     if t == "q":
         clear_screen()
         print("You didn't even try the game =(")
         quit()
     
+    #If you do not enter a correct letter in setup the program will tell you that it is wrong and you can try again. 
     elif t != "x" and t != "o":
         print(t + " is not a correct letter.")
         setup()
         
         
-        
+
+
+
+
+
+
+#The clear screen function is what CLEARS THE SCREEN WOW WHO KNEW.
 def clear_screen():
-    #Clears the terminal screen.
+    
     if s==1:
         os.system("clear")
     elif s==0:
         os.system("cls")
-        
+
+
+
+
+
+
+
+#The print board function is the function that PRINTS THE BOARD WOW AMAZING.
 def print_board():
     
-    global board
-    
     #For loop that prints each array in board.
-    #I chose the letter q for the loop randomly.
-    for q in board:
-        print(q)
+    #I chose the letter l because l for *l*oop.
+    for l in board:
+        print(l)
 
-#Defines the game function.
+
+
+
+
+
+#The end screen fucntion is used to figure out what end screen to display when someone has won. 
 def end_screen_func():
     
+    #Board is global because it is used in the print board fucntion. 
     global board
     
     clear_screen()
     
-    
+    #This is the board which is a 2d array. 
     board = [[a,b,c],
              [d,e,f],
              [g,h,i]
              ]
+    #All of below are used to check if any player has won the game yet.
     
     #a,b,c
     if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X":
@@ -199,9 +229,14 @@ def end_screen_func():
     #c,e,g
     elif board[0][2] == "O" and board[1][1] == "O" and board[2][0] == "O":
         p_x_fail()
-            
+    
+    
+    
+    #This call of print board is when it is displayed to the screen the most all other times are if you did something wrong.
     print_board()
-        
+    
+    
+    
     #a,b,c
     if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X":
         p_x_win()
@@ -267,9 +302,12 @@ def end_screen_func():
        
        
        
-       
+
+#player turn is used to figure out which players turn it is and takes input from the player for their turn.
 def player_turn():
     
+    #All of these values MUST be global because even though they are already global they must be set to global in this function-
+    #-becuase they are reassigned with new values in this fucntion. 
     global t,a,b,c,d,e,f,g,h,i
     
     #Checks to see if it is player x turn.
@@ -313,8 +351,18 @@ def player_turn():
         elif x==i:
             i="X"
         else:
-            #Prints FAIL if player x did not enter a correct letter.
-            print("{FAIL}")
+            clear_screen()
+            
+            #Used to see if the wrong letter the player gave back was one of the ones actually used. 
+            if x=="A" or x=="B" or x=="C" or x=="D" or x=="E" or x=="F" or x=="G" or x=="H" or x=="I":
+                print(x+" is taken, you must find another spot.")
+            
+            #If not then they have to do it again. 
+            else:
+                print(x+" is not a correct letter.")
+                
+            print_board()
+            player_turn()
             
         #Sets t to o so that next turn is player o turn.
         t="o"
@@ -361,12 +409,25 @@ def player_turn():
         elif o==i:
             i="O"
         else:
-            #Prints FAIL if player o did not enter a correct letter.
-            print("{FAIL}")
+            clear_screen()
             
-        #Sets t to o so that next turn is player x turn.
+            #Used to see if the wrong letter the player gave back was one of the ones actually used. 
+            if o=="A" or o=="B" or o=="C" or o=="D" or o=="E" or o=="F" or o=="G" or o=="H" or o=="I":
+                print(o+" is taken, you must find another spot.")
+                
+            #If not then they have to do it again.
+            else:
+                print(o+" is not a correct letter.")
+                
+            print_board()
+            player_turn()
+                
+            
+        #Sets t to x so that next turn is player x turn.
         t="x"
-            
+
+#The game function which runs the setup function once and then runs the end screen function and the player turn function in a loop until-
+#-a player wins or someone quits the game.
 def game():
     setup()
     while True:
@@ -374,12 +435,12 @@ def game():
         player_turn()
         
 
-#Defines the main function.
+#The main function calls the game function or runs it.
 def main():
-    #Calls the game function.
+    #Calls or runs(kinda the samething) the game function.
     game()
 
 #If statment that checks if this current file name that the program is in is main.
 if __name__ == "__main__":
-    #Calls that main function. 
+    #Calls or runs(kinda the samething) that main function. 
     main()
