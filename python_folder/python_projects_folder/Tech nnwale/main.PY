@@ -3,7 +3,7 @@ from turtle import width
 import pygame
 import os
 
-#Folder name OH+`` YEA GAM 
+#Folder name Tech nnwale.
 #By Santino .J. Tomasi
 #Version beta 1.0
 #Date of version 4/25/2022
