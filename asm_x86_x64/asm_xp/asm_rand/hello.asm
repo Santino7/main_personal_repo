@@ -1,27 +1,36 @@
-;This is a asm file used for random things.
 ;By Santino .J. Tomasi
-
-
-section .data
-	a_char db "ow",0
-	a_thing db "hi"
+;This file is subject to change. 
+;This is a asm file used for random things.
+;Current program: Increases or decreases exit code to wanted value. 
 
 section .text
 	global _start
-
 _start:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, a_char
-	mov rdx, 3
-	syscall
-
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, a_thing
-	mov rdx, 2
-	syscall
+	mov rcx, 3
 	
+	mov rdi, 55
+
+	cmp rdi, rcx
+	
+	je end
+
+	jl less_loop
+
+	jg great_loop
+less_loop:
+	cmp rdi,rcx
+	je end
+
+	add rdi, 1
+
+	jmp less_loop
+great_loop:
+	cmp rdi,rcx
+	je end
+
+	sub rdi, 1
+
+	jmp great_loop
+end:	
 	mov rax,60
-	mov rdi, 0
 	syscall
