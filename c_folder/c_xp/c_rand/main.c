@@ -1,15 +1,19 @@
-//By Santino .J. Tomasi
-//This is a random c file that is just used for random on the spot tests.
-//Is subject to change
+/*By Santino J. Tomasi
+This is a file for random things \/
+				 ||
+				 ^^
+				 __
+*/
 
+#include <ncurses.h>
 
-#include <stdio.h>
-
-int main(void){
-
-	
-
-	printf("hi\n");
+int main()
+{	
+	initscr();			
+	printw("(0^^0)");
+	refresh();			
+	getch();			
+	endwin();		
 
 	return 0;
 }
